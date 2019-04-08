@@ -1,8 +1,11 @@
 package com.example.mohitkumar.footballapp.di.modules;
 
-import android.support.constraint.solver.Cache;
+
+import android.util.Log;
 
 import com.example.mohitkumar.footballapp.FootBallApplication;
+import com.example.mohitkumar.footballapp.Utils.Utils;
+import com.example.mohitkumar.footballapp.data.auth.AuthHolder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,8 +19,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.CacheControl;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
@@ -27,6 +33,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Module(includes = ApiModule.class)
 public class NetworkModule {
+
+    public static final String TAG = "FootBall App Log";
 
     @Provides
     @Singleton
@@ -87,6 +95,27 @@ public class NetworkModule {
                 .build();
     }
 
+    @Provides
+    @Singleton
+    @Named("authenticator")
+    Interceptor authenticator(AuthHolder authHolder) {
+        return chain -> {
+            Request original = chain.request();
+
+            String authorization = authHolder.getAuthorization();
+            if (authorization == null) {
+                Log.d(TAG, "Someone tried to access resources without auth token. Maybe auth request?");
+                return chain.proceed(original);
+            }
+
+            Request request = original.newBuilder()
+                    .header("Authorization", authorization)
+                    .method(original.method(), original.body())
+                    .build();
+
+            return chain.proceed(request);
+        };
+    }
 
     @Provides
     @Singleton
@@ -96,7 +125,7 @@ public class NetworkModule {
                 .client(client)
                 .addConverterFactory(factory)
                 .addCallAdapterFactory(callAdapterFactory)
-                .baseUrl("https://newsapi.org/v2/")
+                .baseUrl("http://api.football-data.org/v2/")
                 .build();
     }
 }

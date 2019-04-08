@@ -16,8 +16,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
         ActivityBuildersModule.class,
         AndroidSupportInjectionModule.class,
         AppModule.class})
-
-
 public interface AppComponent extends AndroidInjector<FootBallApplication> {
 
     void inject(FootBallApplication footBallApplication);
