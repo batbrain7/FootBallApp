@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textViewFMA">40dp</dimen>
+    <dimen name="recylerViewMargin">30dp</dimen>
+    <dimen name="card_padding">60dp</dimen>
+    <dimen name="card_corners">10dp</dimen>
+</resources>
