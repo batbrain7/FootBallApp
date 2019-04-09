@@ -1,3 +1,63 @@
 <resources>
     <string name="app_name">Football App</string>
+    <string name="recent_matches">Recent Matches</string>
+    <string name="leagues">Leagues</string>
+
+    <string-array name="LeagueNames">
+        <item>CHAMPIONS LEAGUE</item>
+        <item>PREMIER LEAGUE</item>
+        <item>LA LIGA</item>
+        <item>EREDIVISIE</item>
+        <item>BUNDESLIGA</item>
+        <item>LIGUE 1</item>
+        <item>SERIE A</item>
+        <item>PRIMEIRA LIGA</item>
+        <item>EURO CUP</item>
+        <item>WORLD CUP</item>
+        <item>SERIE A</item>
+    </string-array>
+
+    <string-array name="CountryNames">
+        <item>Europe</item>
+        <item>England</item>
+        <item>Spain</item>
+        <item>Netherlands</item>
+        <item>Germany</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Portugal</item>
+        <item>EUROPE</item>
+        <item>World</item>
+        <item>Brazil</item>
+    </string-array>
+
+    <string name="choose_league">Choose a League</string>
+
+    <string-array name="Logos">
+        <item>Europe</item>
+        <item>England</item>
+        <item>Spain</item>
+        <item>Netherlands</item>
+        <item>Germany</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Portugal</item>
+        <item>EUROPE</item>
+        <item>World</item>
+        <item>Brazil</item>
+    </string-array>
+
+    <string-array name="links">
+        <item>http://www.sportingintelligence.com/wp-content/uploads/2010/01/UCL-logo.jpg</item>
+        <item>https://i.pinimg.com/originals/2a/cc/ee/2accee3ed2f6c675d66001711dcbd1c4.png</item>
+        <item>http://content.sportslogos.net/logos/130/4163/full/7308_la_liga_-primary-2015.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Eredivisie_nieuw_logo_2017-.svg/1200px-Eredivisie_nieuw_logo_2017-.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Bundesliga_logo_%282017%29.svg/1200px-Bundesliga_logo_%282017%29.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/Ligue_1_Logo.svg/1200px-Ligue_1_Logo.svg.png</item>
+        <item>https://logoeps.com/wp-content/uploads/2012/12/serie-a-vector-logo.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/0/0e/Liga_NOS_logo.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/en/thumb/9/96/UEFA_Euro_2020_Logo.svg/220px-UEFA_Euro_2020_Logo.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/en/thumb/6/67/2018_FIFA_World_Cup.svg/227px-2018_FIFA_World_Cup.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Campeonato_Brasileiro_S%C3%A9rie_A_logo.png/200px-Campeonato_Brasileiro_S%C3%A9rie_A_logo.png</item>
+    </string-array>
 </resources>
