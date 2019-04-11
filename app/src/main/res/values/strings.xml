@@ -31,7 +31,7 @@
         <item>Brazil</item>
     </string-array>
 
-    <string name="choose_league">Choose a League</string>
+    <string name="choose_league">Choose a league</string>
 
     <string-array name="Logos">
         <item>Europe</item>

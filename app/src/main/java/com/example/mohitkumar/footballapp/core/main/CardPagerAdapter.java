@@ -13,18 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.example.mohitkumar.footballapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
@@ -92,25 +85,11 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         TextView leagueName = view.findViewById(R.id.leagueName);
         TextView country = view.findViewById(R.id.country);
 
-        Glide.with(context)
-                .asBitmap()
+        Picasso.get()
                 .load(item.getImageURL())
-//                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(50, 50,
-//                        RoundedCornersTransformation.CornerType.)))
-                .listener(new RequestListener<Bitmap>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                        logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_filter_2_white_24dp));
-                        Toast.makeText(context, "FAILED", Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        logo.setImageBitmap(resource);
-                        return true;
-                    }
-                }).submit();
+                .placeholder(R.drawable.ic_stars_white_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                .into(logo);
         leagueName.setText(item.getLeagueName());
         country.setText(item.getCountry());
     }
