@@ -3,21 +3,14 @@ package com.example.mohitkumar.footballapp;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 
-import com.example.mohitkumar.footballapp.core.main.CardFragmentPagerAdapter;
-import com.example.mohitkumar.footballapp.core.main.CardItem;
+import com.example.mohitkumar.footballapp.Utils.Utils;
 import com.example.mohitkumar.footballapp.core.main.CardPagerAdapter;
 import com.example.mohitkumar.footballapp.core.main.ShadowTransformer;
 import com.example.mohitkumar.footballapp.databinding.ActivityFootballMainBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -40,24 +33,15 @@ public class FootballMainActivity extends AppCompatActivity implements HasSuppor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_football_main);
+        Utils.fillMap(this);
         setup();
     }
 
     private void setup() {
         Log.d(TAG, "IN HERE");
-        String[] leagueNames = this.getResources().getStringArray(R.array.LeagueNames);
-        String[] country = this.getResources().getStringArray(R.array.CountryNames);
-        String[] urls = this.getResources().getStringArray(R.array.links);
-        ArrayList<CardItem> itemList = new ArrayList<CardItem>();
-        int i = 0;
         mainBinding.viewPager.setPageMargin(-80);
-        Log.d(TAG,"SIZE" + Integer.toString(itemList.size()));
         cardPagerAdapter = new CardPagerAdapter(this);
-        for (String arr : leagueNames) {
-            cardPagerAdapter.addCardItem(new CardItem(arr, country[i], urls[i]));
-            i++;
-        }
-
+        Utils.insertCardAdapter(this, cardPagerAdapter);
         shadowTransformer = new ShadowTransformer(mainBinding.viewPager, cardPagerAdapter);
         mainBinding.viewPager.setAdapter(cardPagerAdapter);
         mainBinding.viewPager.setPageTransformer(false, shadowTransformer);

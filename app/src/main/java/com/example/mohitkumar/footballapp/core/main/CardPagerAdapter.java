@@ -1,6 +1,7 @@
 package com.example.mohitkumar.footballapp.core.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohitkumar.footballapp.R;
+import com.example.mohitkumar.footballapp.core.LeagueActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -71,6 +73,16 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
         cardView.setMaxCardElevation(baseElevation * MAX_ELEVATION_FACTOR);
         cardViews.set(position, cardView);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tv = v.findViewById(R.id.leagueName);
+                Intent intent = new Intent(context, LeagueActivity.class);
+                intent.putExtra("name", tv.getText().toString());
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 

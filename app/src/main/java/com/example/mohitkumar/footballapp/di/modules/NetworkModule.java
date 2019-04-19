@@ -109,7 +109,7 @@ public class NetworkModule {
             }
 
             Request request = original.newBuilder()
-                    .header("Authorization", authorization)
+                    .header("X-Auth-Token", authorization)
                     .method(original.method(), original.body())
                     .build();
 
@@ -125,7 +125,7 @@ public class NetworkModule {
                 .client(client)
                 .addConverterFactory(factory)
                 .addCallAdapterFactory(callAdapterFactory)
-                .baseUrl("http://api.football-data.org/v2/")
+                .baseUrl("http://api.football-data.org/v2/competitions/")
                 .build();
     }
 }
