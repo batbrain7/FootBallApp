@@ -31,7 +31,7 @@
         <item>Brazil</item>
     </string-array>
 
-    <string name="choose_league">Choose a League</string>
+    <string name="choose_league">Choose a league</string>
 
     <string-array name="Logos">
         <item>Europe</item>
@@ -60,4 +60,20 @@
         <item>https://upload.wikimedia.org/wikipedia/en/thumb/6/67/2018_FIFA_World_Cup.svg/227px-2018_FIFA_World_Cup.svg.png</item>
         <item>https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Campeonato_Brasileiro_S%C3%A9rie_A_logo.png/200px-Campeonato_Brasileiro_S%C3%A9rie_A_logo.png</item>
     </string-array>
+
+    <integer-array name="IDs">
+        <item>2001</item>
+        <item>2021</item>
+        <item>2014</item>
+        <item>2003</item>
+        <item>2002</item>
+        <item>2015</item>
+        <item>2019</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2000</item>
+        <item>2013</item>
+    </integer-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

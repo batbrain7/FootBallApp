@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".core.League.LeagueActivity"></activity>
+        <activity android:name=".core.LeagueActivity"></activity>
     </application>
 
 </manifest>
