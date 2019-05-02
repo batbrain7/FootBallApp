@@ -32,7 +32,7 @@ public class TeamViewModel extends ViewModel {
                 .subscribe(status -> {
                     data.setValue(status.teamData);
                 }, error -> {
-                    Log.i("HeadlineFragment.class", "onStart: " + error);
+                    Log.i("TeamFragment.class", "onStart: " + error);
                 });
         return data;
     }
