@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.mohitkumar.footballapp.FootBallApplication;
 import com.example.mohitkumar.footballapp.Utils.Utils;
 import com.example.mohitkumar.footballapp.data.auth.AuthHolder;
+import com.example.mohitkumar.footballapp.data.teams.TeamResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,7 +48,7 @@ public class NetworkModule {
 
     @Provides
     Class[] providesMappedClasses() {
-        return new Class[] {};
+        return new Class[] {TeamResponse.class};
     }
 
     @Provides
