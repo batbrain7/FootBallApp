@@ -13,9 +13,11 @@ import com.example.mohitkumar.footballapp.databinding.ActivityLeagueBinding;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-public class LeagueActivity extends AppCompatActivity {
+public class LeagueActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     private ActivityLeagueBinding leagueBinding;
     static int LEAGUE_CODE;
@@ -41,5 +43,10 @@ public class LeagueActivity extends AppCompatActivity {
         leagueFragmentAdapter.addFragments(new TeamFragment(), this.getResources().getString(R.string.team_fragment));
         leagueBinding.viewPager.setAdapter(leagueFragmentAdapter);
         leagueBinding.tabLayout.setupWithViewPager(leagueBinding.viewPager);
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
     }
 }
