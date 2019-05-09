@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.di;
+package com.example.mohitkumar.footballapp.di;
 
 public interface Injectable {
 }
