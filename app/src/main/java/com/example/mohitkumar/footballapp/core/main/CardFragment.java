@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 
 import com.example.mohitkumar.footballapp.R;
 import com.example.mohitkumar.footballapp.databinding.FragmentCardBinding;
+import com.example.mohitkumar.footballapp.di.Injectable;
 
 
-public class CardFragment extends Fragment {
+public class CardFragment extends Fragment implements Injectable {
     private CardView cardView;
     private FragmentCardBinding binding;
 

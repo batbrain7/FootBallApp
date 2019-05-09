@@ -18,12 +18,13 @@ import com.example.mohitkumar.footballapp.Utils.Utils;
 import com.example.mohitkumar.footballapp.data.teams.TeamData;
 import com.example.mohitkumar.footballapp.data.teams.TeamService;
 import com.example.mohitkumar.footballapp.databinding.FragmentTeamBinding;
+import com.example.mohitkumar.footballapp.di.Injectable;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class TeamFragment extends Fragment {
+public class TeamFragment extends Fragment implements Injectable {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;

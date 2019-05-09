@@ -3,8 +3,6 @@ package com.example.mohitkumar.footballapp.di;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import com.example.mohitkumar.footballapp.FootBallApplication;
 
 import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public final class AppInjector {
@@ -72,8 +71,11 @@ public final class AppInjector {
                     .registerFragmentLifecycleCallbacks(
                             new FragmentManager.FragmentLifecycleCallbacks() {
                                 @Override
-                                public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
-                                    super.onFragmentCreated(fm, f, savedInstanceState);
+                                public void onFragmentCreated(FragmentManager fm, Fragment f,
+                                                              Bundle savedInstanceState) {
+                                    if (f instanceof Injectable) {
+                                        AndroidSupportInjection.inject(f);
+                                    }
                                 }
                             }, true);
         }

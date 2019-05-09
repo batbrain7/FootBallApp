@@ -18,12 +18,15 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class FootballMainActivity extends AppCompatActivity {
+public class FootballMainActivity extends AppCompatActivity implements HasSupportFragmentInjector{
 
     private ActivityFootballMainBinding mainBinding;
     private CardPagerAdapter cardPagerAdapter;
     private ShadowTransformer shadowTransformer;
     public static final String TAG = "FOOTBALL MAIN ACTIVITY";
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +45,10 @@ public class FootballMainActivity extends AppCompatActivity {
         mainBinding.viewPager.setAdapter(cardPagerAdapter);
         mainBinding.viewPager.setPageTransformer(false, shadowTransformer);
         mainBinding.viewPager.setOffscreenPageLimit(3);
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
     }
 }
