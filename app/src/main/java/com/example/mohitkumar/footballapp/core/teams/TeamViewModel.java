@@ -25,14 +25,14 @@ public class TeamViewModel extends ViewModel {
     }
 
     @SuppressLint("CheckResult")
-    public LiveData<List<TeamData>> getTeamData() {
-        service.getTeams(2001)
+    public LiveData<List<TeamData>> getTeamData(int id) {
+        service.getTeams(id)
                 .doOnSubscribe(disposable -> progress.setValue(0))
                 .doFinally(() -> progress.setValue(8))
                 .subscribe(status -> {
                     data.setValue(status.teamData);
                 }, error -> {
-                    Log.i("TeamFragment.class", "onStart: " + error);
+                    Log.d("TeamFragment.class", "onStart: " + error.getMessage());
                 });
         return data;
     }

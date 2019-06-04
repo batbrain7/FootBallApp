@@ -37,13 +37,14 @@ public class TeamFragment extends Fragment implements Injectable {
     private FragmentTeamBinding fragmentTeamBinding;
     int leagueCode;
     public static final String TAG = "Team Fragment";
+    String name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentTeamBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false);
-        String name = getActivity().getIntent().getStringExtra("name");
+        name = getActivity().getIntent().getStringExtra("name");
         if (!TextUtils.isEmpty(name))
             leagueCode = Utils.map.get(name);
 
@@ -56,13 +57,17 @@ public class TeamFragment extends Fragment implements Injectable {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "Loading the teams");
         loadTeams();
     }
 
     private void loadTeams() {
-        teamViewModel.getTeamData().observe(this, list -> {
+        teamViewModel.getTeamData(leagueCode).observe(this, list -> {
             teamDataList = list;
+            if (list != null)
+                Log.d(TAG, list.size() + " " + list.toString());
+            else
+                Log.d(TAG, "Empty list");
         });
-        Log.d(TAG, teamDataList.toString());
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mohitkumar.footballapp.data.teams;
 
 import android.content.Context;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -22,8 +23,11 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Observable<TeamResponse> getTeams(int id) {
-        return teamsApi.getTeams(id)
+        Observable<TeamResponse> responseObservable = teamsApi.getTeams(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainThread());
+        Log.d("TeamServiceImpl", responseObservable.toString());
+
+        return responseObservable;
     }
 }

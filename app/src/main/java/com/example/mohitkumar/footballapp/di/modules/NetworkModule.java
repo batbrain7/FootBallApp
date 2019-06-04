@@ -26,6 +26,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -35,7 +36,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @Module(includes = ApiModule.class)
 public class NetworkModule {
 
-    public static final String TAG = "FootBall App Log";
+    public static final String TAG = "FootBallAppLog";
 
     @Provides
     @Singleton
@@ -67,6 +68,15 @@ public class NetworkModule {
 
     @Provides
     @Singleton
+    HttpLoggingInterceptor loggingInterceptor() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        return interceptor;
+    }
+
+    @Provides
+    @Singleton
     Cache providesCache() {
         int cacheSize = 10 * 1024 * 1024; // 10 MB
         return new Cache(FootBallApplication.context.getCacheDir(), cacheSize);
@@ -78,39 +88,34 @@ public class NetworkModule {
         return RxJava2CallAdapterFactory.create();
     }
 
-    @Provides
-    @Singleton
-    OkHttpClient providesOkHttpClient(Cache cache) {
-        return new OkHttpClient.Builder()
-                .cache(cache)
-                .addNetworkInterceptor(chain -> {
-                    Response response = chain.proceed(chain.request());
-                    CacheControl cacheControl =
-                            new CacheControl.Builder().maxAge(1, TimeUnit.MINUTES).build();
-                    return response.newBuilder()
-                            .removeHeader("pragma")
-                            .removeHeader("Cache-Control")
-                            .header("Cache-Control", cacheControl.toString())
-                            .build();
-                })
-                .build();
-    }
+//    @Provides
+//    @Singleton
+//    OkHttpClient providesOkHttpClient(Cache cache) {
+//        return new OkHttpClient.Builder()
+//                .cache(cache)
+//                .addNetworkInterceptor(chain -> {
+//                    Response response = chain.proceed(chain.request());
+//                    CacheControl cacheControl =
+//                            new CacheControl.Builder().maxAge(1, TimeUnit.MINUTES).build();
+//                    return response.newBuilder()
+//                            .removeHeader("pragma")
+//                            .removeHeader("Cache-Control")
+//                            .header("Cache-Control", cacheControl.toString())
+//                            .build();
+//                })
+//                .build();
+//    }
 
     @Provides
     @Singleton
     @Named("authenticator")
-    Interceptor authenticator(AuthHolder authHolder) {
+    Interceptor authenticator() {
         return chain -> {
             Request original = chain.request();
 
-            String authorization = authHolder.getAuthorization();
-            if (authorization == null) {
-                Log.d(TAG, "Someone tried to access resources without auth token. Maybe auth request?");
-                return chain.proceed(original);
-            }
-
+            Log.d(TAG, "Authorization not null");
             Request request = original.newBuilder()
-                    .header("X-Auth-Token", authorization)
+                    .header("X-Auth-Token", "797ad1104406499e92149d685830061a")
                     .method(original.method(), original.body())
                     .build();
 
@@ -127,6 +132,20 @@ public class NetworkModule {
                 .addConverterFactory(factory)
                 .addCallAdapterFactory(callAdapterFactory)
                 .baseUrl("http://api.football-data.org/v2/competitions/")
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    OkHttpClient providesOkHttpClient(
+            HttpLoggingInterceptor loggingInterceptor,
+            @Named("authenticator") Interceptor authenticator,
+            Cache cache
+    ) {
+        return new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(authenticator)
+                .cache(cache)
                 .build();
     }
 }
